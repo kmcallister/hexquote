@@ -84,7 +84,7 @@ mkExtract (Take _ (Just n) : ts) = let nn = fromIntegral n in
     [| \x -> case B.splitAt nn x of
                  (y,z) | B.length y == nn -> (y:) <$> $(mkExtract ts) z
                        | otherwise -> Nothing |]
-mkExtract (Take _ _ : ts)  = [| \x -> (x:) <$> $(mkExtract ts) B.empty |]
+mkExtract (Take _ Nothing : ts) = [| \x -> [x] <$ $(mkExtract ts) B.empty |]
 
 mkPat :: [Tok] -> Q Pat
 mkPat ts = viewP (mkExtract ts) (conP 'Just [listP vars]) where
