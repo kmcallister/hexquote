@@ -80,7 +80,6 @@ mkExtract (Take _ (Just n) : ts) = let nn = fromIntegral n in
     [| \x -> case B.splitAt nn x of
                  (y,z) | B.length y == nn -> (y:) <$> $(mkExtract ts) z
                        | otherwise -> Nothing |]
-mkExtract [Take _ Nothing] = [| \x -> Just [x] |]
 mkExtract (Take _ _ : ts)  = [| \x -> (x:) <$> $(mkExtract ts) B.empty |]
 
 mkPat :: [Tok] -> Q Pat
