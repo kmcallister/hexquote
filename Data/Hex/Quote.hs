@@ -2,6 +2,9 @@
     TemplateHaskell
   , NamedFieldPuns
   , CPP #-}
+
+-- | Provides a quasiquoter for hexadecimal ByteString literals, with
+-- placeholders that bind variables.
 module Data.Hex.Quote
     ( -- * The quasiquoter
       hex
