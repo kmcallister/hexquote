@@ -1,0 +1,10 @@
+hexquote provides hexadecimal ByteString literals, with placeholders
+that bind variables.
+
+Documentation is hosted at http://hackage.haskell.org/package/hexquote
+
+To build the documentation yourself, run
+
+  $ cabal configure && cabal haddock --hyperlink-source
+
+This will produce HTML documentation under dist/doc/html/hexquote.
