@@ -7,7 +7,7 @@ category:            Data
 author:              Keegan McAllister <mcallister.keegan@gmail.com>
 maintainer:          Keegan McAllister <mcallister.keegan@gmail.com>
 build-type:          Simple
-cabal-version:       >=1.4
+cabal-version:       >=1.6
 description:
   This library defines a quasiquoter for @ByteString@s. As an expression, it
   provides hexadecimal @ByteString@ literals.  As a pattern, the hexdump can
@@ -29,3 +29,7 @@ library
     , NamedFieldPuns
     , CPP
     , ViewPatterns
+
+source-repository head
+    type:     git
+    location: git://github.com/kmcallister/hexquote.git
