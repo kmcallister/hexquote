@@ -45,11 +45,9 @@ parseHex = pair . catMaybes . map get . dropComments where
     pair (h:l:xs) = (h*16 + l) : pair xs
     pair _ = []
 
+-- We can't lift Word8, but Int lifts to a polymorphic literal
 liftBS :: [Word8] -> Q Exp
-liftBS xs = lift $ map conv xs where
-    -- We can't lift Word8, but Int lifts to a polymorphic literal
-    conv :: Word8 -> Int
-    conv = fromIntegral
+liftBS xs = lift (map fromIntegral xs :: [Int])
 
 hexExp :: String -> Q Exp
 hexExp xs = [| B.pack $(liftBS $ parseHex xs) |]
