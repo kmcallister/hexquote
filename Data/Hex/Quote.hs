@@ -89,7 +89,7 @@ mkPat ts = viewP (mkExtract ts) (conP 'Just [listP vars]) where
     vars = [ mkV n | Take n _ <- ts ]
 
 hexPat :: String -> Q Pat
-hexPat xs = case parse parseToks "Data.Hex.Quote pattern" xs of
+hexPat xs = case parse parseToks "Data.Hex.Quote pattern" (dropComments xs) of
     Left  e -> error (show e)
     Right v -> mkPat v
 
