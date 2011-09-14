@@ -1,6 +1,7 @@
 {-# LANGUAGE
     TemplateHaskell
-  , NamedFieldPuns #-}
+  , NamedFieldPuns
+  , CPP #-}
 module Data.Hex.Quote
     ( hex
     ) where
@@ -95,5 +96,10 @@ hexPat xs = case parse parseToks "Data.Hex.Quote pattern" xs of
 
 hex :: QuasiQuoter
 hex = QuasiQuoter
-    { quoteExp = hexExp
-    , quotePat = hexPat }
+    { quoteExp  = hexExp
+    , quotePat  = hexPat
+#if MIN_VERSION_template_haskell(2,5,0)
+    , quoteType = const (error "no type quote for Data.Hex.Quote")
+    , quoteDec  = const (error "no decl quote for Data.Hex.Quote")
+#endif
+    }
