@@ -81,7 +81,7 @@ mkExtract (Lit xs : ts) = let n = length xs in
     [| \x -> case B.splitAt n x of
                  (y,z) | B.unpack y == $(liftBS xs) -> $(mkExtract ts) z
                        | otherwise -> Nothing |]
-mkExtract (Take _ (Just n) : ts) = let nn = fromIntegral n in
+mkExtract (Take _ (Just n) : ts) = let nn = fromIntegral n :: Int in
     [| \x -> case B.splitAt nn x of
                  (y,z) | B.length y == nn -> (y:) <$> $(mkExtract ts) z
                        | otherwise -> Nothing |]
